@@ -1,3 +1,4 @@
+import android.os.Bundle;
 package com.rentx;
 
 import android.os.Bundle;
@@ -42,4 +43,9 @@ public class MainActivity extends ReactActivity {
             }
         };
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(null);
+}
 }

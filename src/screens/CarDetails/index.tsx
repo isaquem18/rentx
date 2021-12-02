@@ -8,7 +8,6 @@ import {
 import SpeedSvg from '../../assets/speed.svg';
 import AccelerationSvg from '../../assets/acceleration.svg';
 import ForceSvg from '../../assets/force.svg';
-import GasolineSvg from '../../assets/gasoline.svg';
 import ExchangeSvg from '../../assets/exchange.svg';
 import PeopleSvg from '../../assets/people.svg';
 
@@ -22,8 +21,24 @@ import {
 } from './styles';
 import { Acessory } from '../../components/Acessory';
 import { FooterButton } from '../../components/FooterButton';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { CarDTO } from '../../dtos/carDTO';
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
+
+interface Params {
+  car: CarDTO;
+}
 
 export const CarDetails = () => {
+
+  const navigation = useNavigation<any>();
+
+  const { car } = useRoute().params as Params;
+
+
+  const handleSchedulingDetails = () => {
+    navigation.navigate('Scheduling')
+  }
 
   return (
     <>
@@ -41,39 +56,48 @@ export const CarDetails = () => {
         <Acessories>
           <Acessory 
             icon={SpeedSvg}
-            name="380km/h"
+            name={car.accessories[0].name}
           />
           <Acessory 
             icon={AccelerationSvg}
-            name="3.2s"
+            name={car.accessories[1].name}
           />
           <Acessory 
             icon={ForceSvg}
-            name="800 HP"
+            name={car.accessories[2].name}
           />
           <Acessory 
-            icon={GasolineSvg}
-            name="Gasolina"
+            icon={getAccessoryIcon(car.fuel_type)}
+            name={car.accessories[3].name}
           />
           <Acessory 
             icon={ExchangeSvg}
-            name="Auto"
+            name={car.accessories[4].name}
           />
           <Acessory 
             icon={PeopleSvg}
-            name="2 pessoas"
+            name={car.accessories[5].name}
           />
         </Acessories>
         <About>
-          Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar.
+        {car.about}
+        {car.about}
+        {car.about}
+        {car.about}
+        {car.about}
+        {car.about}
+        {car.about}
+        {car.about}
+        {car.about}
+        {car.about}
+        {car.about}
+        {car.about}
         </About>
       </Container>
         <Footer>
           <FooterButton 
             title="Escolher período do aluguel"
-            onPress={() => {
-              console.log('clicou footer button');
-            }}
+            onPress={handleSchedulingDetails}
           />
         </Footer>
     </>

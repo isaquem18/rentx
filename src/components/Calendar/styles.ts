@@ -3,5 +3,5 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   background-color: red;
-  height: ${RFPercentage(20)}px;
+  height: ${RFPercentage(15)}px;
 `;

@@ -80,4 +80,6 @@ export const Content = styled.ScrollView.attrs({
   }
 })``;
 
-export const Footer = styled.View``;
+export const Footer = styled.View`
+  margin-top: ${RFPercentage(4)}px;
+`;

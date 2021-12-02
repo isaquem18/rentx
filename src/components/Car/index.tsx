@@ -1,4 +1,8 @@
 import React from 'react';
+import { ActivityIndicator } from 'react-native';
+import { RectButtonProps } from 'react-native-gesture-handler';
+import { CarDTO } from '../../dtos/carDTO';
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 
 import { 
   Container,
@@ -14,29 +18,20 @@ import {
   CarImage
 } from './styles';
 
-interface carData {
-  brand: string;
-  name: string;
-  image: string;
-  rent: {
-    period: string;
-    price: number;
-  }
-}
-
-interface Props {
-  data: carData;
+interface Props extends RectButtonProps {
+  data: CarDTO;
 }
 
 export const Car = ({ data: {
   brand,
   name,
-  image,
+  thumbnail,
+  fuel_type,
   rent: {
     period,
     price
   }
-}}: Props) => {
+}, ...rest}: Props) => {
 
   let formattedPrice = Number(price)
     .toLocaleString('pt-BR', {
@@ -44,8 +39,10 @@ export const Car = ({ data: {
       currency: 'BRL'
     });
 
+  const FuelType = getAccessoryIcon(fuel_type)
+    
   return (
-    <Container>
+    <Container {...rest}>
       <Details>
         <Brand>{brand}</Brand>
         <Name>{name}</Name>
@@ -55,11 +52,11 @@ export const Car = ({ data: {
             <Price>{formattedPrice}</Price>
           </Rent>
           <Type>
-            <Gasoline />
+           <FuelType />
           </Type>
         </About>
       </Details>
-      <CarImage source={{uri: image}} />
+      <CarImage source={{uri: thumbnail}} />
     </Container>
   )
 }

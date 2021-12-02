@@ -1,12 +1,17 @@
 import styled from 'styled-components/native';
-import { RFValue } from 'react-native-responsive-fontsize';
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
+import { RectButton } from 'react-native-gesture-handler';
+import { RectButtonProps } from 'react-native-gesture-handler';
 
 import GasolineStyle from '../../assets/gasoline.svg';
 
-export const Container = styled.View`
+export const Container = styled(RectButton).attrs<RectButtonProps>(({theme}) => ({
+  underlayColor: '#000',
+  activeOpacity: 0.2
+}))`
   background-color: ${({theme}) => theme.colors.background_secondary};
   flex-direction: row;
-  padding: ${RFValue(17)}px ${RFValue(24)}px;
+  padding: ${RFValue(17)}px ${RFValue(20)}px;
   justify-content: space-between;
   margin-bottom: 16px;
 `;
@@ -54,12 +59,17 @@ export const Price = styled.Text`
   margin-top: 4px;
 `;
 
-export const Type = styled.View``;
+export const Type = styled.View`
+  flex: 1;
+  min-width: ${RFPercentage(7)}px;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const CarImage = styled.Image.attrs({
   resizeMode: 'contain',
 
 })`
-  width: ${RFValue(167)}px;
+  width: ${RFValue(160)}px;
   height: ${RFValue(85)}px;
 `;
